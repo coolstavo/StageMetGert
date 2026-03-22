@@ -54,7 +54,7 @@ Follow these steps to get the project running locally:
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/your-username/StageMetGert.git
+git clone https://github.com/coolstavo/StageMetGert.git
 cd StageMetGert
 ```
 
