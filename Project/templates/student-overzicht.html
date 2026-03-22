@@ -1,0 +1,87 @@
+
+{%extends "base.html"%}
+
+
+{%block content%}
+
+<h1 class="display-6 fw-bold headings text-center mb-5"> Overzicht </h1>
+
+<div class="container w-100 table">
+    <div class="general-container w-100 mx-auto overflow-auto">
+
+        <div class="d-flex justify-content-center mb-3">
+
+            <div>
+                <a data-bs-toggle="modal" data-bs-target="#wijzigenModal" class="btn btn-primary">Wijzigen</a>
+            </div>
+
+        </div>
+
+        <div class="p-5 mb-2 text-center">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Student</th>
+                        <th scope="col">Stagebedrijf</th>
+                        <th scope="col">Begeleider</th>
+                        <th scope="col">Cijfer</th>
+                        <th scope="col">Periode</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if overzicht %}
+
+                        {% for item in overzicht %}
+                            <tr>
+                                <td scope="row">{{ item.studenten.voornaam }} {{ item.studenten.achternaam }}</td>
+                                <td scope="row">{{ item.stages.bedrijfsnaam }}</td>
+                                <td scope="row">{{ item.begeleiding.voornaam }} {{ item.begeleiding.achternaam }}</td>
+                                <td scope="row">{{ item.cijfer }}</td>
+                                <td scope="row">{{ item.periode }}</td>
+                            </tr>
+                        {% endfor %}
+
+                    {% else %}
+                        <tr>
+                            <td colspan="11" class="text-center"> <br> Geen informatie gevonden <br> Ga naar je favorieten om je te aanmelden bij een stage</td>
+                        </tr>
+                    {% endif %}
+                </tbody>                
+            </table>  
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="wijzigenModal" tabindex="-1" aria-labelledby="wijzigenModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="wijzigenModal"> Wijzigen </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action=/student/overzicht class="caps">
+                        {{ form.hidden_tag() }}
+                        {{ form.csrf_token }}
+
+                        <div class="form mb-4">
+                            {{ form.id_stage.label }} {{ form.id_stage(class="form-control form-control-lg") }}
+                        </div>
+
+                        <div class="form mb-4">
+                            {{ form.id_begeleider.label }} {{ form.id_begeleider(class="form-control form-control-lg") }}
+                        </div>
+
+                        <div class="form mb-4">
+                            {{ form.periode.label }} {{ form.periode(class="form-control form-control-lg", placeholder="Periode, Jaar") }}
+                        </div>
+
+                        {{ form.submit(class="btn btn-primary btn-lg btn-block mt-3") }}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{%endblock%}

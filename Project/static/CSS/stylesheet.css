@@ -1,0 +1,91 @@
+/* ----------------------------------Colors--------------------------------------------*/
+:root {
+  --primary-color: #EE7F00;
+  --secondary-color: #B44708;
+  --background-color: #FFF5EB;
+  --body-text-color: #31231E;
+}
+
+/* ----------------------------------General------------------------------------------- */
+
+body {
+  background-color: var(--background-color);
+}
+
+h1, h2 {
+  color: var(--primary-color);
+}
+
+h3, h4, h5, h6{
+  color: var(--secondary-color);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.table {
+  width: 100%;
+  max-width: 1680px;
+  border-collapse: collapse;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-inline {
+  margin-right: 10px;
+}
+
+.general-container {
+  background-color: #FFFFFF ;
+  border-color: #FFFFFF ;
+  padding: 20px;
+  border-radius: 1rem ;
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.1);
+}
+
+/* -----------------------------------Navbar------------------------------------------- */
+
+nav {
+  background-color: var(--primary-color);
+}
+
+.navbar-brand:focus, .navbar-brand:hover {
+  color: var(--secondary-color);
+}
+
+.brand-color{
+  color: var(--secondary-color) ;
+}
+
+.hover-effect-btn:hover {
+  background-color: #ffe4cb;
+  color: white;
+}
+
+.hover-effect-links:hover {
+  color:var(--secondary-color) !important;
+  box-shadow: 10px 1o px 0 px var(--secondary-color) !important;
+  top: -5px;
+  left: -5px;
+}
+
+
+/* --------------------------------------Bootstraps Overrides---------------------------------------- */
+
+.btn-primary {
+  background-color: var(--secondary-color) ;
+  border-color: var(--secondary-color) ;
+}
+
+.btn-primary:hover {
+  background-color:var(--primary-color) ;
+  border-color: var(--primary-color) ;
+}
+
+.text-bg-primary{
+  background-color: var(--secondary-color) !important;
+}

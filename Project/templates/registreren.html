@@ -1,0 +1,106 @@
+{%extends "base.html"%}
+
+
+{%block content%}
+<div class="container mt-5 py-5 h-200 w-200 pt-5">
+  <div class="row d-flex justify-content-center align-items-center h-100">
+    <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+      <div class="card general-container">
+        <div class="card-body p-5 mb-2 text-center">
+
+          <h3 class="mb-5">Registreren</h3>
+
+          <form method="POST" action="/registreren" class="caps">
+            {{ form.hidden_tag() }}
+
+              {% if form.errors %}
+                  <div class="alert alert-danger">
+                      <ul>
+                          {% for field, errors in form.errors.items() %}
+                              {% for error in errors %}
+                                  <li>{{ error }}</li>
+                              {% endfor %}
+                          {% endfor %}
+                      </ul>
+                  </div>
+              {% endif %}
+
+            <div class="row">
+              <div class="col-md-6 mb-4">
+                <div class="form-outline">
+                  {{ form.voornaam.label }}
+                  {{ form.voornaam(class="form-control form-control-lg", id="form3Example1") }}
+                </div>
+              </div>
+              <div class="col-md-6 mb-4">
+                <div class="form-outline">
+                  {{ form.achternaam.label }}
+                  {{ form.achternaam(class="form-control form-control-lg", id="form3Example2") }}
+                </div>
+              </div>
+            </div>
+
+            <div class="form mb-4">
+              {{ form.email.label }} {{ form.email(class="form-control form-control-lg") }}
+            </div>
+
+            <div class="form mb-4">
+              {{ form.wachtwoord.label }} {{ form.wachtwoord(class="form-control form-control-lg") }}
+            </div>
+
+            <div class="form mb-4">
+              {{ form.wachtwoord_comf.label }} {{ form.wachtwoord_comf(class="form-control form-control-lg") }}
+            </div>
+
+            <div class="form mb-4">
+              {{ form.geboortedatum.label }} {{ form.geboortedatum(class="form-control form-control-lg", placeholder="DD-MM-YYYY") }}
+            </div>
+          
+            <div class="form mb-4">
+              {{ form.straat.label }} {{ form.straat(class="form-control form-control-lg") }}
+            </div>
+          
+            <div class="form mb-4">
+              {{ form.stad.label }} {{ form.stad(class="form-control form-control-lg") }}
+            </div>
+          
+            <div class="form mb-4">
+              {{ form.provincie.label }} {{ form.provincie(class="form-control form-control-lg") }}
+            </div>
+          
+
+            <div class="form mb-4">
+              {{ form.postcode.label }} {{ form.postcode(class="form-control form-control-lg", placeholder="XXXXAB") }}
+            </div>
+          
+            <div class="form mb-4">
+              {{ form.opleidingsniveau_id.label }} {{ form.opleidingsniveau_id(class="form-control form-control-lg") }}
+            </div>
+          
+            {{ form.submit(class="btn btn-primary btn-lg btn-block mt-3") }}
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- {% with messages = get_flashed_messages() %}
+  {% if messages %}
+
+
+    {% for message in messages %}
+
+    <p class="container">{{ message }}</p>
+
+    {% endfor %}
+
+
+  {% endif %}
+{% endwith %} -->
+
+
+{%endblock%}

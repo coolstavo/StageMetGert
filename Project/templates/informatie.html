@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="display-6 fw-bold headings text-center mb-5">Informatie</h2>
+
+<div class="container mt-5">
+    <div class="row">
+
+        <div class="col-md-4 mb-4">
+            <h3>Beschikbare Stages</h3>
+            <a href="{{ url_for('stages') }}">Kijk hier naar de aanwezige stages</a>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <h3>Hulpbronnen</h3>
+            <p>Voeg hier links toe naar nuttige hulpbronnen voor stagiairs.</p>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <h3>Contact</h3>
+            <p>Neem voor verdere vragen of ondersteuning contact met ons op via <b> g.h.costa.araujo@st.hanze.nl </b> </p>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <h3>Succesverhalen</h3>
+            <p>
+                "Ik heb een stage gevonden die perfect bij mij past en ik ben aangenomen!"
+                - <b>Jan</b>
+                <br>
+                <hr>
+                "Ik heb een stage gevonden die perfect bij mij past en ik ben aangenomen!"
+                - <b>Gert</b>
+                <br>
+                <hr>
+                "Ik heb een stage gevonden die perfect bij mij past en ik ben aangenomen!"
+                - <b>Arjen</b>
+            </p>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <h3>Veelgestelde Vragen (FAQ)</h3>
+            <p>
+                Q: Ik heb mij aangemeld, wat nu?
+                <br>
+                A: Wacht op een reactie van de stagebegeleider.
+            </p>
+            <hr>
+            <p>
+                Q: Hoe kan ik een stage toevoegen aan mijn favorieten?
+                <br>
+                A: Klik op het hartje onder de stage.
+            </p>
+            <hr>
+            <p>
+                Q: Hoe kan ik een stage verwijderen uit mijn favorieten?
+                <br>
+                A: Klik op het kruisje onder de stage.
+            </p>
+            <hr>
+            <p>
+                Q: Hoe kan ik mij aanmelden voor een stage?
+                <br>
+                A: Klikop de knop met een plusje knop op de stage kaartje.
+            </p>
+            <hr>
+            <p>
+                Q: Hoe kan ik mijn account verwijderen?
+                <br>
+                A: Vraag het aan je mentor.
+            </p>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <h3>Sollicitatieproces</h3>
+            <p>Maak een account aan, voeg de leukste stages toe aan je favorieten en vervolgens kun je je aanmelden.
+                <br>
+                <br> Geef wie je graag als begeleider zou willen hebben en vervolgens in welke periode en jaar je van plan bent om te gaan.
+                <br>
+                <br> Wacht op een reactie van de stagebegeleider en ga op gesprek.
+            </p>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

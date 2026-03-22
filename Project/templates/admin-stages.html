@@ -1,0 +1,214 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="display-6 fw-bold headings text-center mb-5">Stages</h2>
+
+<div class="container w-100 table">
+    <div class="general-container w-100">
+
+        <div class="d-flex justify-content-center">
+            <div class="me-2">
+                <a data-bs-toggle="modal" data-bs-target="#stageFormModal" class="btn btn-primary">Stage Toevoegen</a>
+            </div>
+            <div>
+                <a data-bs-toggle="modal" data-bs-target="#stageDeleteFormModal" class="btn btn-primary">Stage Verwijderen</a>
+            </div>
+            <div>
+                <a data-bs-toggle="modal" data-bs-target="#stageWijzigenModal" class="btn btn-primary">Stage wijzigen</a>
+            </div>
+        </div>
+        
+        
+        <div class="p-5 mb-2 text-center">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Bedrijfsnaam</th>
+                        <th scope="col">Sector</th>
+                        <th scope="col">Beschrijving</th>
+                        <th scope="col">Stad</th>
+                        <th scope="col"style="width: 10%;">Stage duur</th>
+                        <th scope="col">Functie</th>
+                        <th scope="col">Opleidingsniveau</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for stage in stages %}
+                    <tr>
+                        <th scope="row">{{ stage.id }}</th>
+                        <td scope="row">{{ stage.bedrijfsnaam }}</td>
+                        <td scope="row">{{ stage.sector }}</td>
+                        <td scope="row">{{ stage.beschrijving[:50] }}{% if stage.beschrijving|length > 50 %}...{% endif %}</td>
+                        <td scope="row">{{ stage.stad }}</td>
+                        <td scope="row">{{ stage.stage_duur }}</td>
+                        <td scope="row">{{ stage.functie }}</td>
+                        <td scope="row">{{ stage.opleidingsniveau.niveau }}</td>
+                    </tr>
+                    {% endfor %}                    
+                    
+                </tbody>                
+            </table>  
+
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="stageFormModal" tabindex="-1" aria-labelledby="stageFormModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="stageFormModalLabel">Stage Toevoegen</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="/admin/stages" class="caps">
+                    {{ form.hidden_tag() }}
+                
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="form-outline">
+                                {{ form.bedrijfsnaam.label }}
+                                {{ form.bedrijfsnaam(class="form-control form-control-lg", id="bedrijfsnaam") }}
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="form-outline">
+                                {{ form.sector.label }}
+                                {{ form.sector(class="form-control form-control-lg", id="type_id") }}
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="form mb-4">
+                        {{ form.beschrijving.label }} {{ form.beschrijving(class="form-control form-control-lg", id="beschrijving") }}
+                    </div>
+                
+                    <div class="form mb-4">
+                        {{ form.image_link.label }} {{ form.image_link(class="form-control form-control-lg", id="image_link") }}
+                    </div>
+                
+                    <div class="form mb-4">
+                        {{ form.stad.label }} {{ form.stad(class="form-control form-control-lg", id="stad") }}
+                    </div>
+                
+                    <div class="form mb-4">
+                        {{ form.stage_duur.label }} {{ form.stage_duur(class="form-control form-control-lg", id="stage_duur") }}
+                    </div>
+                
+                    <div class="form mb-4">
+                        {{ form.functie.label }} {{ form.functie(class="form-control form-control-lg", id="functie") }}
+                    </div>
+                
+                    <div class="form mb-4">
+                        {{ form.opleidingsniveau_id.label }} {{ form.opleidingsniveau_id(class="form-control form-control-lg", id="opleidingsniveau_id") }}
+                    </div>
+                
+                    {{ form.submit(class="btn btn-primary btn-lg btn-block mt-3") }}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="stageDeleteFormModal" tabindex="-1" aria-labelledby="stageFormModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="stageFormModalLabel">Stage Verwijderen</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <form method="POST" action="/admin/stages" class="caps">
+                    {{ delete_form.hidden_tag() }}
+                    {{ delete_form.csrf_token }}
+
+                    <div class="form mb-4">
+                        {{ delete_form.bedrijfsnaam.label }} {{ delete_form.bedrijfsnaam(class="form-control form-control-lg", id="bedrijfsnaam") }}
+                    </div>
+
+                    {{ delete_form.submit(class="btn btn-primary btn-lg btn-block") }}
+
+                </form>
+                
+            </div>
+
+        </div>
+        
+    </div>
+</div>
+
+<div class="modal fade" id="stageWijzigenModal" tabindex="-1" aria-labelledby="stageWijzigenModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="stageWijzigenModalLabel">Stage wijzigen</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="/admin/stages" class="caps">
+                    {{ update_form.hidden_tag() }}
+                    {{ update_form.csrf_token }}
+
+                    <div class="form mb-4">
+                        {{ update_form.id.label(class="form-label") }}
+                        {{ update_form.id(class="form-control form-control-lg", id="id") }}
+                    </div>
+
+                    <div class="form mb-4">
+                        {{ update_form.bedrijfsnaam.label }}
+                        {{ update_form.bedrijfsnaam(class="form-control form-control-lg", id="bedrijfsnaam") }}
+                    </div>
+
+                    <div class="form mb-4">
+                        {{ update_form.sector.label }}
+                        {{ update_form.sector(class="form-select form-select-lg", id="type_id") }}
+                    </div>
+
+                    <div class="form mb-4">
+                        {{ update_form.beschrijving.label }}
+                        {{ update_form.beschrijving(class="form-control form-control-lg", id="beschrijving") }}
+                    </div>
+
+                    <div class="form mb-4">
+                        {{ update_form.image_link.label }}
+                        {{ update_form.image_link(class="form-control form-control-lg", id="image_link") }}
+                    </div>
+
+                    <div class="form mb-4">
+                        {{ update_form.begeleider_id.label }}
+                        {{ update_form.begeleider_id(class="form-select form-select-lg", id="begeleider_id") }}
+                    </div>
+
+                    <div class="form mb-4">
+                        {{ update_form.stad.label }}
+                        {{ update_form.stad(class="form-control form-control-lg", id="stad") }}
+                    </div>
+
+                    <div class="form mb-4">
+                        {{ update_form.stage_duur.label }}
+                        {{ update_form.stage_duur(class="form-control form-control-lg", id="stage_duur") }}
+                    </div>
+
+                    <div class="form mb-4">
+                        {{ update_form.functie.label }}
+                        {{ update_form.functie(class="form-control form-control-lg", id="functie") }}
+                    </div>
+
+                    <div class="form mb-4">
+                        {{ update_form.opleidingsniveau_id.label }}
+                        {{ update_form.opleidingsniveau_id(class="form-select form-select-lg", id="opleidingsniveau_id") }}
+                    </div>
+
+                    {{ update_form.submit(class="btn btn-primary btn-lg btn-block mt-3") }}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

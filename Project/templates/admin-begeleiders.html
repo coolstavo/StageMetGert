@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="display-6 fw-bold headings text-center mb-5">Begeleiders</h2>
+
+<div class="container w-100 table">
+    <div class="general-container w-100">
+
+        <div class="d-flex justify-content-center">
+            <div class="me-2">
+                <a data-bs-toggle="modal" data-bs-target="#begeleiderToevoegenModal" class="btn btn-primary">Begeleider Toevoegen</a>
+            </div>
+            <div class="me-2">
+                <a data-bs-toggle="modal" data-bs-target="#begeleiderVerwijderenModal" class="btn btn-primary">Begeleider Verwijderen</a>
+            </div>
+            <div>
+                <a data-bs-toggle="modal" data-bs-target="#begeleiderWijzigenModal" class="btn btn-primary">Begeleider wijzigen</a>
+            </div>
+        </div>
+        
+        <div class="p-5 mb-2 text-center">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Voornaam</th>
+                        <th scope="col">Achternaam</th>
+                        <th scope="col">Afdeling</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for begeleider in begeleider %}
+                    <tr>
+                        <th scope="row">{{ begeleider.id }}</th>
+                        <td scope="row">{{ begeleider.voornaam }}</td>
+                        <td scope="row">{{ begeleider.achternaam }}</td>
+                        <td scope="row">{{ begeleider.afdeling }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>                
+            </table>  
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="begeleiderToevoegenModal" tabindex="-1" aria-labelledby="begeleiderToevoegenModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="stageFormModalLabel">Begeleider Toevoegen</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+              <form method="POST" action="/admin/begeleiders" class="caps">
+                {{ form.hidden_tag() }}
+                <div class="row">
+
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                      {{ form.voornaam.label }}
+                      {{ form.voornaam(class="form-control form-control-lg", id="form3Example1") }}
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                      {{ form.achternaam.label }}
+                      {{ form.achternaam(class="form-control form-control-lg", id="form3Example2") }}
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="form mb-4">
+                  {{ form.afdeling.label }} {{ form.afdeling(class="form-control form-control-lg") }}
+                </div>
+    
+                {{ form.submit(class="btn btn-primary btn-lg btn-block mt-3") }}
+              </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="begeleiderVerwijderenModal" tabindex="-1" aria-labelledby="begeleiderVerwijderenModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="stageFormModalLabel">Begeleider Verwijderen</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <form method="POST" action="/admin/begeleiders" class="caps">
+                    {{ delete_form.hidden_tag() }}
+
+                    <div class="form mb-4">
+                      {{ delete_form.id.label(class="form-label") }}
+                      {{ delete_form.id(class="form-control form-control-lg", id="id") }}
+                    </div>
+                  
+
+                    {{ delete_form.submit(class="btn btn-primary btn-lg btn-block") }}
+
+                </form>
+                
+            </div>
+
+        </div>
+        
+    </div>
+</div>
+
+<div class="modal fade" id="begeleiderWijzigenModal" tabindex="-1" aria-labelledby="begeleiderWijzigenModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="begeleiderWijzigenModal">Begeleider wijzigen</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form method="POST" action=/admin/begeleiders class="caps">
+                {{ update_form.hidden_tag() }}
+                {{ update_form.csrf_token }}
+
+                <div class="form mb-4">
+                  {{ update_form.id.label(class="form-label") }}
+                  {{ update_form.id(class="form-control form-control-lg", id="id") }}
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                      {{ update_form.voornaam.label }}
+                      {{ update_form.voornaam(class="form-control form-control-lg", id="form3Example1") }}
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                      {{ update_form.achternaam.label }}
+                      {{ update_form.achternaam(class="form-control form-control-lg", id="form3Example2") }}
+                    </div>
+                  </div>
+                </div>
+              
+                <div class="form mb-4">
+                    {{ update_form.afdeling.label }} 
+                    {{ update_form.afdeling(class="form-control form-control-lg") }}
+                </div>
+              
+                {{ update_form.submit(class="btn btn-primary btn-lg btn-block mt-3") }}
+              </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

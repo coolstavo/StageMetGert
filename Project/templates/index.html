@@ -1,0 +1,78 @@
+{%extends "base.html"%}
+
+{%block content%}
+
+    <div class="container mb-5">
+            <div class="text-center mb-5">
+                <h2 class="display-6 fw-bold headings text-center mb-2"> Stage met Gert </h2>
+                <p>Op deze website kan je terecht voor het vinden van een stageplaats. </p>
+                <p>Je kan je hier registreren en inloggen om een stageplaats te vinden.</p>
+            </div>
+    </div>
+
+
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-2 g-5 p-0 ">
+    
+            {% for stage1 in stages1 %}
+    
+            <div class="col-3">
+                <div class="card">
+                    <img src="{{stage1.image_link}}" class="card-img-top" alt="card" id="home">
+    
+                    <div class="card-body">
+                        <h5 class="card-title">{{ stage1.bedrijfsnaam }}</h5>
+                        <p class="card-text">{{ stage1.beschrijving }}</p>
+
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge rounded-pill text-bg-primary">{{stage1.stad}}</span>
+                        <span class="badge rounded-pill text-bg-primary">{{stage1.sector}}</span>
+                        <span class="badge rounded-pill text-bg-primary">{{stage1.stage_duur}}</span>
+                        <span class="badge rounded-pill text-bg-primary">{{stage1.opleidingsniveau.niveau}}</span>
+                    </div>
+                </div>
+            </div>
+    
+            {% endfor %}
+    
+    
+            {% for stage2 in stages2 %}
+    
+            <div class="col-3">
+                <div class="card ">
+                    <img src="{{stage2.image_link}}" class="card-img-top" alt="card" id="home">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ stage2.bedrijfsnaam }}</h5>
+                        <p class="card-text">{{ stage2.beschrijving }}</p>
+                    </div>
+
+                    <div class="card-footer">
+                        <span class="badge rounded-pill text-bg-primary">{{stage2.stad}}</span>
+                        <span class="badge rounded-pill text-bg-primary">{{stage2.sector}}</span>
+                        <span class="badge rounded-pill text-bg-primary">{{stage2.stage_duur}}</span>
+                        <span class="badge rounded-pill text-bg-primary">{{stage2.opleidingsniveau.niveau}}</span>
+                    </div>
+                </div>
+            </div>
+    
+            {% endfor %}
+    
+        </div>
+    </div>
+
+{%endblock%}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <h1>Welcome to the Home Page</h1>
+    <p>This is a test to ensure the template is being rendered correctly.</p>
+    <!-- Add more content as needed -->
+</body>
+</html>

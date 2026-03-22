@@ -1,0 +1,245 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="display-6 fw-bold headings text-center mb-5">Studenten</h2>
+
+
+<div class="container w-100 table">
+  <div class="general-container w-100">
+
+    <div class="d-flex justify-content-center">
+      <div class="me-2">
+        <a data-bs-toggle="modal" data-bs-target="#studentenToevoegenModal" class="btn btn-primary">Student
+          Toevoegen</a>
+      </div>
+      <div>
+        <a data-bs-toggle="modal" data-bs-target="#studentenVerwijderenModal" class="btn btn-primary">Student
+          Verwijderen</a>
+      </div>
+      <div>
+        <a data-bs-toggle="modal" data-bs-target="#studentWijzigenModal" class="btn btn-primary">Student wijzigen</a>
+      </div>
+    </div>
+
+    <div class="p-5 mb-2 text-center">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Voornaam</th>
+            <th scope="col">Achternaam</th>
+            <th scope="col">Email</th>
+            <th scope="col">Geboortedatum</th>
+            <th scope="col" style="width: 20%"> Straat</th>
+            <th scope="col">Stad</th>
+            <th scope="col">Provincie</th>
+            <th scope="col">Postcode</th>
+            <th scope="col">Opleidingsniveau</th>
+            <!-- <th scope="col">Verwijderen</th> -->
+          </tr>
+        </thead>
+        <tbody>
+          {% for student in students %}
+          <tr>
+            <th scope="row">{{ student.id }}</th>
+            <td scope="row">{{ student.voornaam }}</td>
+            <td scope="row">{{ student.achternaam }}</td>
+            <td scope="row">{{ student.email }}</td>
+            <td scope="row">{{ student.geboortedatum }}</td>
+            <td scope="row">{{ student.straat }}</td>
+            <td scope="row">{{ student.stad }}</td>
+            <td scope="row">{{ student.provincie }}</td>
+            <td scope="row">{{ student.postcode }}</td>
+            <td scope="row">{{ student.opleidingsniveau.niveau }}</td>
+            <!-- <td scope="row">
+              <a href="/admin/studenten/{{ student.id }}" class="btn btn-primary">Bekijken</a>
+            </td> -->
+
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Modals -->
+<div class="modal fade" id="studentenToevoegenModal" tabindex="-1" aria-labelledby="studentenToevoegenModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="studentenToevoegenModal">Student Toevoegen</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="POST" action=/admin/studenten class="caps">
+          {{ form.hidden_tag() }}
+
+          <div class="row">
+            <div class="col-md-6 mb-4">
+              <div class="form-outline">
+                {{ form.voornaam.label }}
+                {{ form.voornaam(class="form-control form-control-lg", id="form3Example1") }}
+              </div>
+            </div>
+            <div class="col-md-6 mb-4">
+              <div class="form-outline">
+                {{ form.achternaam.label }}
+                {{ form.achternaam(class="form-control form-control-lg", id="form3Example2") }}
+              </div>
+            </div>
+          </div>
+
+          <div class="form mb-4">
+            {{ form.email.label }} {{ form.email(class="form-control form-control-lg") }}
+          </div>
+
+          <div class="form mb-4">
+            {{ form.wachtwoord.label }} {{ form.wachtwoord(class="form-control form-control-lg") }}
+          </div>
+
+          <div class="form mb-4">
+            {{ form.wachtwoord_comf.label }} {{ form.wachtwoord_comf(class="form-control form-control-lg") }}
+          </div>
+
+          <div class="form mb-4">
+            {{ form.geboortedatum.label }} {{ form.geboortedatum(class="form-control form-control-lg",
+            placeholder="DD-MM-YYYY") }}
+          </div>
+
+          <div class="form mb-4">
+            {{ form.straat.label }} {{ form.straat(class="form-control form-control-lg") }}
+          </div>
+
+          <div class="form mb-4">
+            {{ form.stad.label }} {{ form.stad(class="form-control form-control-lg") }}
+          </div>
+
+          <div class="form mb-4">
+            {{ form.provincie.label }} {{ form.provincie(class="form-control form-control-lg") }}
+          </div>
+
+          <div class="form mb-4">
+            {{ form.postcode.label }} {{ form.postcode(class="form-control form-control-lg", placeholder="XXXXAB") }}
+          </div>
+
+          <div class="form mb-4">
+            {{ form.opleidingsniveau_id.label }} {{ form.opleidingsniveau_id(class="form-control form-control-lg") }}
+          </div>
+
+          {{ form.submit(class="btn btn-primary btn-lg btn-block mt-3") }}
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="studentenVerwijderenModal" tabindex="-1" aria-labelledby="studentenVerwijderenModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="studentenVerwijderenModal">Student Verwijderen</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <form method="POST" action="/admin/studenten" class="caps">
+          {{ delete_form.hidden_tag() }}
+
+          <div class="form mb-4">
+            {{ delete_form.id.label(class="form-label") }}
+            {{ delete_form.id(class="form-control form-control-lg", id="id") }}
+          </div>
+
+          {{ delete_form.submit(class="btn btn-primary btn-lg btn-block") }}
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="studentWijzigenModal" tabindex="-1" aria-labelledby="studentWijzigenModalLabe;"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="studentWijzigenModal">Student wijzigen</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="POST" action=/admin/studenten class="caps">
+          {{ update_form.hidden_tag() }}
+          {{ update_form.csrf_token }}
+
+          <div class="form mb-4">
+            {{ update_form.id.label(class="form-label") }}
+            {{ update_form.id(class="form-control form-control-lg", id="id") }}
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-4">
+              <div class="form-outline">
+                {{ update_form.voornaam.label }}
+                {{ update_form.voornaam(class="form-control form-control-lg") }}
+              </div>
+            </div>
+            <div class="col-md-6 mb-4">
+              <div class="form-outline">
+                {{ update_form.achternaam.label }}
+                {{ update_form.achternaam(class="form-control form-control-lg") }}
+              </div>
+            </div>
+          </div>
+
+          <div class="form mb-4">
+            {{ update_form.email.label }} {{ update_form.email(class="form-control form-control-lg") }}
+          </div>
+
+          <div class="form mb-4">
+            {{ update_form.wachtwoord.label }} {{ update_form.wachtwoord(class="form-control form-control-lg") }}
+          </div>
+
+          <div class="form mb-4">
+            {{ update_form.wachtwoord_comf.label }} {{ update_form.wachtwoord_comf(class="form-control form-control-lg")
+            }}
+          </div>
+
+          <div class="form mb-4">
+            {{ update_form.geboortedatum.label }} {{ update_form.geboortedatum(class="form-control form-control-lg",
+            placeholder="DD-MM-YYYY") }}
+          </div>
+
+          <div class="form mb-4">
+            {{ update_form.straat.label }} {{ update_form.straat(class="form-control form-control-lg") }}
+          </div>
+
+          <div class="form mb-4">
+            {{ update_form.stad.label }} {{ update_form.stad(class="form-control form-control-lg") }}
+          </div>
+
+          <div class="form mb-4">
+            {{ update_form.provincie.label }} {{ update_form.provincie(class="form-control form-control-lg") }}
+          </div>
+
+          <div class="form mb-4">
+            {{ update_form.postcode.label }} {{ update_form.postcode(class="form-control form-control-lg",
+            placeholder="XXXXAB") }}
+          </div>
+
+          <div class="form mb-4">
+            {{ update_form.opleidingsniveau_id.label }} {{ update_form.opleidingsniveau_id(class="form-control
+            form-control-lg") }}
+          </div>
+
+          {{ update_form.submit(class="btn btn-primary btn-lg btn-block mt-3") }}
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

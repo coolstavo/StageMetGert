@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="display-6 fw-bold headings text-center mb-5"> Favorieten </h1>
+
+{% if favorieten == [] %}
+<div class="container">
+    <div class="row justify-content-center align-items-center">
+
+        <div class="col-md-6">
+            <div class="text-center">
+                <h4 class="fw-bold headings mb-5"> Geen favorieten gevonden</h4>
+                <p class="mb-5">Er zijn momenteel geen favorieten toegevoegd.</p>
+                <a class="btn btn-primary" href="{{ url_for('stages') }}">Ga naar stages</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endif %}
+
+<div class="container mb-5 p0">
+    <div class="row row-cols-1 row-cols-md-2 g-5 p-0 ">
+
+        {% for favoriet in favorieten %}
+
+            <div class="col-3">
+                <div class="card" style="width: 35rem;">
+
+                    <img src="{{ favoriet.stages.image_link }}" class="card-img-top" alt="card">
+
+                    <div class="card-body">
+                        <h5 class="card-title">{{ favoriet.stages.bedrijfsnaam }}</h5>
+                        <p class="card-text">{{ favoriet.stages.beschrijving }}</p>
+
+                    </div>
+
+                    <div class="card-footer">
+
+                        <div class="button-container">
+                            <form method="POST" action="/student/stage" class="form-inline">
+                                {{ form.hidden_tag() }}
+                                <input type="hidden" name="stage_id" value="{{ favoriet.stage_id }}">
+                                {{ form.submit(class="btn btn-outline-danger") }}
+                            </form>
+
+                            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#aanmeldenModal{{ favoriet.stage_id }}">
+                                ➕
+                            </button>
+                        </div>
+
+                        <hr>
+
+                        <span class="badge rounded-pill text-bg-primary">{{ favoriet.stages.stad }}</span>
+                        <span class="badge rounded-pill text-bg-primary">{{ favoriet.stages.sector }}</span>
+                        <span class="badge rounded-pill text-bg-primary">{{ favoriet.stages.stage_duur }}</span>
+                        <span class="badge rounded-pill text-bg-primary">{{ favoriet.stages.opleidingsniveau.niveau }}</span>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% for favoriet in favorieten %}
+    <div class="modal fade" id="aanmeldenModal{{ favoriet.stage_id }}" tabindex="-1" aria-labelledby="aanmeldenModalLabel" aria-hidden="true">
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="aanmeldenModal{{ favoriet.stage_id }}">Aanmelden bij {{favoriet.stages.bedrijfsnaam }} </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action=/student/stage class="caps">
+                        {{ add_form.hidden_tag() }}
+                        <input type="hidden" name="stage_id" value="{{ favoriet.stage_id }}">
+
+                        <div class="form mb-4">
+                            {{ add_form.begeleider_id.label }} {{ add_form.begeleider_id(class="form-control form-control-lg") }}
+                        </div>
+
+                        <div class="form mb-4">
+                            {{ add_form.periode.label }} {{ add_form.periode(class="form-control form-control-lg", placeholder="Periode, Jaar") }}
+                        </div>
+
+                        {{ add_form.submit(class="btn btn-primary btn-lg btn-block mt-3") }}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+{% endblock %}

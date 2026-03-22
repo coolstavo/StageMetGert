@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h2 class="display-6 fw-bold headings text-center mb-4"> Favorieten </h2>
+
+    <div class="container-fluid mb-5">
+
+        <div class="text-center mb-5">
+            <p>Hier vind je een overzicht van je favoriete stages.</p>
+            <p>Je kan je favorieten verwijderen door op het kruisje te klikken.</p>
+
+            <p>Registreer je hier om je te kunnen aanmelden voor een stage</p>
+            <a href="{{ url_for('registreren') }}" class="btn btn-primary">Registreer</a>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <hr>
+
+                <div class="row row-cols-1 row-cols-md-4 g-4">
+                    {% if favorite_stages %}
+                        {% for stage in favorite_stages %}
+                            <div class="col-md-3">
+
+                                <div class="card h-100">
+                                    <img src="{{ stage.image_link }}" class="card-img-top img" alt="card">
+
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ stage.bedrijfsnaam }}</h5>
+                                        <p class="card-text">{{ stage.beschrijving }}</p>
+
+                                    </div>
+                                    <div class="card-footer">
+
+                                        <form method="POST" action="/favorieten">
+                                            <input type="hidden" name="stage_id" value="{{ stage.id }}">
+                                            <button type="submit" class="btn btn-outline-danger">❌</button>
+                                        </form>
+
+                                        <hr>
+
+                                        <span class="badge rounded-pill text-bg-primary">{{ stage.stad }}</span>
+                                        <span class="badge rounded-pill text-bg-primary">{{ stage.sector }}</span>
+                                        <span class="badge rounded-pill text-bg-primary">{{ stage.stage_duur }}</span>
+                                        <span class="badge rounded-pill text-bg-primary">{{ stage.opleidingsniveau.niveau }}</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        {% endfor %}
+                    {% else %}
+
+                </div>
+                    <div class="text-center mt-5">
+                        <p class="display-6">Je hebt nog geen favorieten.</p>
+                        <p>Voeg stages toe aan je favorieten door op het hartje te klikken.</p>
+                        <a href="{{ url_for('stages') }}" class="btn btn-primary">Aanbod bekijken</a>
+                    </div>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

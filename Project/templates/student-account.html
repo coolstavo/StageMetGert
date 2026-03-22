@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="display-6 fw-bold headings text-center mb-5"> Account </h1>
+
+<div class="container w-100 table">
+    <div class="general-container w-100 mx-auto overflow-auto">
+
+        <div class="d-flex justify-content-center mb-3">
+            <div class="me-2">
+                <a data-bs-toggle="modal" data-bs-target="#gegevensWijzigenModal" class="btn btn-primary">Gegevens wijzigen</a>
+            </div>
+        </div>
+
+        <div class="p-5 mb-2 text-center">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Voornaam</th>
+                        <th scope="col">Achternaam</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Wachtwoord</th>
+                        <th scope="col">Geboortedatum</th>
+                        <th scope="col" style="width: 20%"> Straat</th>
+                        <th scope="col">Stad</th>
+                        <th scope="col">Provincie</th>
+                        <th scope="col">Postcode</th>
+                        <th scope="col">Opleidingsniveau</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if student %}
+                    <tr>
+                        <td scope="row">{{ student.voornaam }}</td>
+                        <td scope="row">{{ student.achternaam }}</td>
+                        <td scope="row">{{ student.email }}</td>
+                        <td scope="row">••••••••</td>
+                        <td scope="row">{{ student.geboortedatum }}</td>
+                        <td scope="row">{{ student.straat }}</td>
+                        <td scope="row">{{ student.stad }}</td>
+                        <td scope="row">{{ student.provincie }}</td>
+                        <td scope="row">{{ student.postcode }}</td>
+                        <td scope="row">{{ student.opleidingsniveau.niveau }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="11" class="text-center">Geen student gevonden</td>
+                    </tr>
+                    {% endif %}
+                </tbody>                
+            </table>  
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="gegevensWijzigenModal" tabindex="-1" aria-labelledby="gegevensWijzigenModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="gegevensWijzigenModal">Gegevens wijzigen</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form method="POST" action=/student/account class="caps">
+                {{ form.hidden_tag() }}
+                {{ form.csrf_token }}
+
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                      {{ form.voornaam.label }}
+                      {{ form.voornaam(class="form-control form-control-lg", id="form3Example1") }}
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                      {{ form.achternaam.label }}
+                      {{ form.achternaam(class="form-control form-control-lg", id="form3Example2") }}
+                    </div>
+                  </div>
+                </div>
+    
+                <div class="form mb-4">
+                  {{ form.email.label }} {{ form.email(class="form-control form-control-lg") }}
+                </div>
+    
+                <div class="form mb-4">
+                  {{ form.wachtwoord.label }} {{ form.wachtwoord(class="form-control form-control-lg") }}
+                </div>
+    
+                <div class="form mb-4">
+                  {{ form.wachtwoord_comf.label }} {{ form.wachtwoord_comf(class="form-control form-control-lg") }}
+                </div>
+    
+                <div class="form mb-4">
+                  {{ form.geboortedatum.label }} {{ form.geboortedatum(class="form-control form-control-lg", placeholder="DD-MM-YYYY") }}
+                </div>
+              
+                <div class="form mb-4">
+                  {{ form.straat.label }} {{ form.straat(class="form-control form-control-lg") }}
+                </div>
+              
+                <div class="form mb-4">
+                  {{ form.stad.label }} {{ form.stad(class="form-control form-control-lg") }}
+                </div>
+              
+                <div class="form mb-4">
+                  {{ form.provincie.label }} {{ form.provincie(class="form-control form-control-lg") }}
+                </div>
+              
+                <div class="form mb-4">
+                  {{ form.postcode.label }} {{ form.postcode(class="form-control form-control-lg", placeholder="XXXXAB") }}
+                </div>
+              
+                <div class="form mb-4">
+                  {{ form.opleidingsniveau_id.label }} {{ form.opleidingsniveau_id(class="form-control form-control-lg") }}
+                </div>
+              
+                {{ form.submit(class="btn btn-primary btn-lg btn-block mt-3") }}
+              </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{%endblock%}

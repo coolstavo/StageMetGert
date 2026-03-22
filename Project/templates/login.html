@@ -1,0 +1,36 @@
+{%extends "base.html"%}
+
+
+{%block content%}
+
+  <div class="container mt-5 py-5 h-200 pt-5 ">
+    <div class="row d-flex justify-content-center align-items-center h-100 ">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card general-container">
+          <div class="card-body p-5 mb-2 text-center">
+
+            <h3 class="mb-5">Login</h3>
+
+            <form method="POST" action="/login" class="caps">
+
+              {{ form.hidden_tag() }}
+
+              <div class="form mb-4">
+                {{ form.email.label }} {{ form.email(class="form-control form-control-lg", id="typeEmailX-2") }}
+              </div>
+
+              <div class="form mb-4">
+                {{ form.wachtwoord.label }} {{ form.wachtwoord(class="form-control form-control-lg", id="typePasswordX-2") }}
+              </div>
+
+              {{ form.submit(class="btn btn-primary btn-lg btn-block") }}
+
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{%endblock%}

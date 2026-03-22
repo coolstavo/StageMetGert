@@ -1,0 +1,188 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="display-6 fw-bold headings text-center mb-5">Overzicht</h2>
+
+<div class="container w-100 table">
+    <div class="general-container w-100 mx-auto overflow-auto">
+
+        <div class="d-flex justify-content-center mb-3">
+
+            <div>
+                <a data-bs-toggle="modal" data-bs-target="#studentAanmelden" class="btn btn-primary">Studenten aanmelden</a>
+            </div>
+
+            <div>
+                <a data-bs-toggle="modal" data-bs-target="#cijferToevoegen" class="btn btn-primary">Cijfer toevoegen en Wijzigen</a>
+            </div>
+
+            <div>
+                <a data-bs-toggle="modal" data-bs-target="#wijzigenModal" class="btn btn-primary">Wijzigen</a>
+            </div>
+
+            <div>
+                <a data-bs-toggle="modal" data-bs-target="#verwijderenModal" class="btn btn-primary">Verwijderen</a>
+            </div>
+
+        </div>
+
+        <div class="p-5 mb-2 text-center">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Student</th>
+                        <th scope="col">Stage</th>
+                        <th scope="col">Begeleider</th>
+                        <th scope="col">Cijfer</th>
+                        <th scope="col">Periode</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if overzicht %}
+
+                        {% for item in overzicht %}
+                        <tr>
+                            <td scope="row">{{ item.id }}</td>
+                            <td scope="row">{{ item.studenten.voornaam }} {{ item.studenten.achternaam }}</td>
+                            <td scope="row">{{ item.stages.bedrijfsnaam }}</td>
+                            <td scope="row">{{ item.begeleiding.voornaam }} {{ item.begeleiding.achternaam }}</td>
+                            <td scope="row">{{ item.cijfer }}</td>
+                            <td scope="row">{{ item.periode }}</td>
+                        </tr>
+                        {% endfor %}
+                    
+                    {% else %}
+                    <tr>
+                        <td colspan="11" class="text-center">Geen studenten gevonden</td>
+                    </tr>
+                    {% endif %}
+                </tbody>                
+            </table>  
+        </div>
+    </div>
+</div>
+
+<!-- Modals -->
+<div class="modal fade" id="studentAanmelden" tabindex="-1" aria-labelledby="studentAanmeldenModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="studentAanmeldenModal">Student Aanmelden</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="POST" action=/admin/overzicht class="caps">
+          {{ add_student.hidden_tag() }}
+
+            <div class="form mb-4">
+                {{ add_student.student_id.label }} {{ add_student.student_id(class="form-control form-control-lg") }}
+            </div>
+
+            <div class="form mb-4">
+                {{ add_student.stage_id.label }} {{ add_student.stage_id(class="form-control form-control-lg") }}
+            </div>
+
+            <div class="form mb-4">
+                {{ add_student.begeleider_id.label }} {{ add_student.begeleider_id(class="form-control form-control-lg") }}
+            </div>
+
+            <div class="form mb-4">
+                {{ add_student.periode.label }} {{ add_student.periode(class="form-control form-control-lg", placeholder="Periode, Jaar") }}
+            </div>
+
+          {{ add_student.submit(class="btn btn-primary btn-lg btn-block mt-3") }}
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="cijferToevoegen" tabindex="-1" aria-labelledby="cijferToevoegenModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cijferToevoegen">Cijfer Toevoegen en Wijzigen</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action=/admin/overzicht class="caps">
+                    {{ add_cijfer.hidden_tag() }}
+
+                    <div class="form mb-4">
+                        {{ add_cijfer.overzicht_id.label }} {{ add_cijfer.overzicht_id(class="form-control form-control-lg") }}
+                    </div>
+
+                    <div class="form mb-4">
+                        {{ add_cijfer.cijfer.label }} {{ add_cijfer.cijfer(class="form-control form-control-lg", placeholder="Cijfer met een '.' invullen", oninput="this.value = this.value.replace(',', '.')") }}
+                    </div>
+
+                    {{ add_cijfer.submit(class="btn btn-primary btn-lg btn-block mt-3") }}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="wijzigenModal" tabindex="-1" aria-labelledby="wijzigenModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="wijzigenModal"> Wijzigen </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action=/admin/overzicht class="caps">
+                        {{ update_form.hidden_tag() }}
+                        {{ update_form.csrf_token }}
+
+                        <div class="form mb-4">
+                            {{ update_form.overzicht_id.label }} {{ update_form.overzicht_id(class="form-control form-control-lg") }}
+                        </div>
+
+                        <div class="form mb-4">
+                            {{ update_form.id_stage.label }} {{ update_form.id_stage(class="form-control form-control-lg") }}
+                        </div>
+
+                        <div class="form mb-4">
+                            {{ update_form.id_begeleider.label }} {{ update_form.id_begeleider(class="form-control form-control-lg") }}
+                        </div>
+
+                        <div class="form mb-4">
+                            {{ update_form.periode.label }} {{ update_form.periode(class="form-control form-control-lg", placeholder="Periode, Jaar") }}
+                        </div>
+
+                        {{ update_form.submit(class="btn btn-primary btn-lg btn-block mt-3") }}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="modal fade" id="verwijderenModal" tabindex="-1" aria-labelledby="verwijderenModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="verwijderenModal"> Verwijderen </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action=/admin/overzicht class="caps">
+                        {{ delete_form.hidden_tag() }}
+
+                        <div class="form mb-4">
+                            {{ delete_form.overzicht_id.label }} {{ delete_form.overzicht_id(class="form-control form-control-lg") }}
+                        </div>
+
+                        {{ delete_form.submit(class="btn btn-primary btn-lg btn-block mt-3") }}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
