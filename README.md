@@ -111,22 +111,22 @@ To explore the platform as a student, please **register a new account** via the 
 |:---:|:---:|
 | <img src="./assets/screenshots/Home.png" width="400" /> | <img src="./assets/screenshots/Account.png" width="400" /> |
 
-| Favorites | Extra |
+| Favorites | Internships |
 |:---:|:---:|
-| <img src="./assets/screenshots/Favorite.png" width="400" /> | <img src="./assets/screenshots/Screenshot-2026-03-22-at-20.51.35.png" width="400" /> |
+| <img src="./assets/screenshots/Favorite.png" width="400" /> | <img src="./assets/screenshots/Internships.png" width="400" /> |
+
+| Information | |
+|:---:|:---:|
+| <img src="./assets/screenshots/Information.png" width="400" /> | |
 
 ### 🛡️ Admin Album
-| Internships | Students |
+| Internships Overview | Students |
 |:---:|:---:|
 | <img src="./assets/screenshots/Admin-Internship.png" width="400" /> | <img src="./assets/screenshots/Admin-Students.png" width="400" /> |
 
-| Add Internship | Extra 1 |
+| Add Internship | Grades |
 |:---:|:---:|
-| <img src="./assets/screenshots/Admin-Add-Internship.png" width="400" /> | <img src="./assets/screenshots/Screenshot-2026-03-22-at-20.51.42.png" width="400" /> |
-
-| Extra 2 | Extra 3 |
-|:---:|:---:|
-| <img src="./assets/screenshots/Screenshot-2026-03-22-at-20.51.47.png" width="400" /> | <img src="./assets/screenshots/Screenshot-2026-03-22-at-20.53.18.png" width="400" /> |
+| <img src="./assets/screenshots/Admin-Add-Internship.png" width="400" /> | <img src="./assets/screenshots/Admin-Grades.png" width="400" /> |
 
 ---
 
