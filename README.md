@@ -115,10 +115,6 @@ To explore the platform as a student, please **register a new account** via the 
 |:---:|:---:|
 | <img src="./assets/screenshots/Favorite.png" width="400" /> | <img src="./assets/screenshots/Internships.png" width="400" /> |
 
-| Information | |
-|:---:|:---:|
-| <img src="./assets/screenshots/Information.png" width="400" /> | |
-
 ### 🛡️ Admin Album
 | Internships Overview | Students |
 |:---:|:---:|
