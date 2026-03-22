@@ -111,18 +111,18 @@ To explore the platform as a student, please **register a new account** via the 
 |:---:|:---:|
 | <img src="./assets/screenshots/Home.png" width="400" /> | <img src="./assets/screenshots/Account.png" width="400" /> |
 
-**Favorites**
-<br>
-<img src="./assets/screenshots/Favorite.png" width="800" />
+| Favorites | |
+|:---:|:---:|
+| <img src="./assets/screenshots/Favorite.png" width="400" /> | |
 
 ### 🛡️ Admin Album
 | Internships | Students |
 |:---:|:---:|
 | <img src="./assets/screenshots/Admin-Internship.png" width="400" /> | <img src="./assets/screenshots/Admin-Students.png" width="400" /> |
 
-**Add Internship**
-<br>
-<img src="./assets/screenshots/Admin-Add-Internship.png" width="800" />
+| Add Internship | |
+|:---:|:---:|
+| <img src="./assets/screenshots/Admin-Add-Internship.png" width="400" /> | |
 
 ---
 
